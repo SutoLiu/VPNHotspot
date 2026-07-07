@@ -132,6 +132,18 @@ fun SettingsScreen(snackbarHostState: SnackbarHostState) {
     val autoStart by if (inspectionMode) {
         remember { mutableStateOf(false) }
     } else rememberPreferenceBoolean(BootReceiver.KEY, false)
+    val autoStartWifi by if (inspectionMode) {
+        remember { mutableStateOf(false) }
+    } else rememberPreferenceBoolean(BootReceiver.KEY_AUTO_START_WIFI, false)
+    val autoStartUsb by if (inspectionMode) {
+        remember { mutableStateOf(false) }
+    } else rememberPreferenceBoolean(BootReceiver.KEY_AUTO_START_USB, false)
+    val autoStartBluetooth by if (inspectionMode) {
+        remember { mutableStateOf(false) }
+    } else rememberPreferenceBoolean(BootReceiver.KEY_AUTO_START_BLUETOOTH, false)
+    val autoStartEthernet by if (inspectionMode) {
+        remember { mutableStateOf(false) }
+    } else rememberPreferenceBoolean(BootReceiver.KEY_AUTO_START_ETHERNET, false)
     val useSystemTempHotspot by if (inspectionMode) {
         remember { mutableStateOf(false) }
     } else rememberPreferenceBoolean(LocalOnlyHotspotService.KEY_USE_SYSTEM, false)
@@ -328,6 +340,62 @@ fun SettingsScreen(snackbarHostState: SnackbarHostState) {
                         if (!inspectionMode) {
                             app.pref.edit { putBoolean(BootReceiver.KEY, enabled) }
                             scope.launch { BootReceiver.onUserSettingUpdated(enabled) }
+                        }
+                    },
+                )
+            }
+            row(R.string.settings_service_auto_start_wifi) {
+                SwitchPreferenceRow(
+                    icon = R.drawable.ic_network_wifi,
+                    title = R.string.settings_service_auto_start_wifi,
+                    summary = stringResource(R.string.settings_service_auto_start_wifi_summary),
+                    checked = autoStartWifi,
+                    onCheckedChange = { enabled ->
+                        if (!inspectionMode) {
+                            app.pref.edit { putBoolean(BootReceiver.KEY_AUTO_START_WIFI, enabled) }
+                            scope.launch { BootReceiver.onAutoStartTetherTypeUpdated() }
+                        }
+                    },
+                )
+            }
+            row(R.string.settings_service_auto_start_usb) {
+                SwitchPreferenceRow(
+                    icon = R.drawable.ic_usb,
+                    title = R.string.settings_service_auto_start_usb,
+                    summary = stringResource(R.string.settings_service_auto_start_usb_summary),
+                    checked = autoStartUsb,
+                    onCheckedChange = { enabled ->
+                        if (!inspectionMode) {
+                            app.pref.edit { putBoolean(BootReceiver.KEY_AUTO_START_USB, enabled) }
+                            scope.launch { BootReceiver.onAutoStartTetherTypeUpdated() }
+                        }
+                    },
+                )
+            }
+            row(R.string.settings_service_auto_start_bluetooth) {
+                SwitchPreferenceRow(
+                    icon = R.drawable.ic_bluetooth,
+                    title = R.string.settings_service_auto_start_bluetooth,
+                    summary = stringResource(R.string.settings_service_auto_start_bluetooth_summary),
+                    checked = autoStartBluetooth,
+                    onCheckedChange = { enabled ->
+                        if (!inspectionMode) {
+                            app.pref.edit { putBoolean(BootReceiver.KEY_AUTO_START_BLUETOOTH, enabled) }
+                            scope.launch { BootReceiver.onAutoStartTetherTypeUpdated() }
+                        }
+                    },
+                )
+            }
+            if (Build.VERSION.SDK_INT >= 30) row(R.string.settings_service_auto_start_ethernet) {
+                SwitchPreferenceRow(
+                    icon = R.drawable.ic_lan,
+                    title = R.string.settings_service_auto_start_ethernet,
+                    summary = stringResource(R.string.settings_service_auto_start_ethernet_summary),
+                    checked = autoStartEthernet,
+                    onCheckedChange = { enabled ->
+                        if (!inspectionMode) {
+                            app.pref.edit { putBoolean(BootReceiver.KEY_AUTO_START_ETHERNET, enabled) }
+                            scope.launch { BootReceiver.onAutoStartTetherTypeUpdated() }
                         }
                     },
                 )
