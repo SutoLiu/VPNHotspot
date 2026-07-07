@@ -281,6 +281,14 @@
     <string name="settings_service_auto_start">Auto start services</string>
     <string name="settings_service_auto_start_summary">Restore services if they were running before device reboot or app
         update</string>
+    <string name="settings_service_auto_start_wifi">Auto start WLAN hotspot</string>
+    <string name="settings_service_auto_start_wifi_summary">Turn on the system WLAN hotspot on boot</string>
+    <string name="settings_service_auto_start_usb">Auto start USB tethering</string>
+    <string name="settings_service_auto_start_usb_summary">Turn on system USB tethering on boot</string>
+    <string name="settings_service_auto_start_bluetooth">Auto start Bluetooth tethering</string>
+    <string name="settings_service_auto_start_bluetooth_summary">Turn on system Bluetooth tethering on boot</string>
+    <string name="settings_service_auto_start_ethernet">Auto start Ethernet tethering</string>
+    <string name="settings_service_auto_start_ethernet_summary">Turn on system Ethernet tethering on boot</string>
     <string name="settings_service_repeater_supplicant_mode_warning">Short network names may require Supplicant mode</string>
     <string name="settings_service_temp_hotspot_use_system">Use system configuration for temporary hotspot</string>
     <string name="settings_service_temp_hotspot_use_system_summary">Will conflict with other apps using local only
